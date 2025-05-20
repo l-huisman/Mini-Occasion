@@ -25,6 +25,7 @@ class VehicleResource extends Resource
                     ->placeholder('A-111-AA')
                     ->regex('/([A-Z]-\d{3}-[A-Z]{2})|([A-Z]{2}-\d{3}-[A-Z])|(\d{2}-[A-Z]{3}-\d)|(\d-[A-Z]{3}-\d{2})|([A-Z]{3}-\d{2}-[A-Z])|([A-Z]-\d{2}-[A-Z]{3})|(\d-[A-Z]{2}-\d{3})/u')
                     ->required()
+                    ->unique(ignoreRecord: true)
                     ->validationMessages([
                         'regex' => 'The license plate format is invalid.',
                         'required' => 'The license plate is required.'

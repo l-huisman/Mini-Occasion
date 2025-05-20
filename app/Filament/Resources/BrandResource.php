@@ -22,7 +22,7 @@ class BrandResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->placeholder('Tesla')
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                     ->required(),
                 Forms\Components\TextInput::make('description')
                     ->placeholder('Tesla is an American electric vehicle and clean energy company.')
@@ -50,6 +50,10 @@ class BrandResource extends Resource
                     ->height(100)
                     ->width(100)
                     ->label('Image')
+                    ->extraAttributes(fn ($record): array => [
+                        'alt' => $record->name,
+                        'class' => 'rounded-lg',
+                    ])
                     ->getStateUsing(fn($record): string => asset($record->url)),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
