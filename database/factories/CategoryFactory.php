@@ -8,7 +8,7 @@ use App\Models\Category;
 class CategoryFactory extends Factory
 {
     protected static array $categoryNames = [
-        'Busjes', 'SUV', 'Personen', 'Cabrio'
+        'Bus', 'SUV', 'Person', 'Convertable', 'Luxury', 'Sport', 'Electric', 'Hybrid', 'Diesel', 'Petrol', 'Gasoline', 'Crossover', 'Pickup', 'Trekhaak'
     ];
 
     /**

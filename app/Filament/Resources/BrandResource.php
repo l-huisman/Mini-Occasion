@@ -27,6 +27,11 @@ class BrandResource extends Resource
                 Forms\Components\TextInput::make('description')
                     ->placeholder('Tesla is an American electric vehicle and clean energy company.')
                     ->maxLength(255),
+                Forms\Components\TextInput::make('slug')
+                    ->placeholder('http://mini-occasions.test')
+                    ->url()
+                    ->maxLength(255)
+                    ->required(),
                 Forms\Components\FileUpload::make('url')
                     ->label('Image')
                     ->disk('public')
@@ -46,11 +51,13 @@ class BrandResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable(),
                 Tables\Columns\ImageColumn::make('url')
                     ->height(100)
                     ->width(100)
                     ->label('Image')
-                    ->extraAttributes(fn ($record): array => [
+                    ->extraAttributes(fn($record): array => [
                         'alt' => $record->name,
                         'class' => 'rounded-lg',
                     ])

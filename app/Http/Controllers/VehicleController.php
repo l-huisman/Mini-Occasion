@@ -36,9 +36,9 @@ class VehicleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(vehicle $vehicle)
+    public function show(Vehicle $vehicle)
     {
-        //
+        return view('vehicle.show', ['vehicle' => $vehicle]);
     }
 
     /**

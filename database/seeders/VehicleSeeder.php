@@ -18,7 +18,7 @@ class VehicleSeeder extends Seeder
         $vehicles = Vehicle::factory(10)->create();
 
         foreach ($vehicles as $vehicle) {
-            $vehicle->categories()->attach($categories->random());
+            $vehicle->categories()->attach($categories->random(2));
         }
     }
 }

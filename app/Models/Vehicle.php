@@ -18,10 +18,14 @@ class Vehicle extends Model
         'build_date',
         'bought_at',
         'available_at',
-        'url'
+        'url',
+        'description',
+        'model',
+        'mileage',
     ];
 
-    public function user(): BelongsTo{
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 

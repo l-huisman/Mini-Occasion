@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\HtmlString;
 
 class VehicleResource extends Resource
 {
@@ -45,7 +44,6 @@ class VehicleResource extends Resource
                         'before_or_equal' => 'The build date must be before or equal to today.',
                         'required' => 'The build date is required.',
                     ]),
-
                 Forms\Components\TextInput::make('bought_at')
                     ->rule(['gt:0'])
                     ->minValue(0)
@@ -57,11 +55,20 @@ class VehicleResource extends Resource
                     ->placeholder('19200')
                     ->required()
                     ->numeric(),
+                Forms\Components\TextInput::make('model')
+                    ->placeholder('Model')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('mileage')
+                    ->placeholder('30000')
+                    ->numeric(),
                 Forms\Components\Select::make('categories')
                     ->relationship('categories', 'name')
                     ->multiple()
                     ->preload()
                     ->required(),
+                Forms\Components\Textarea::make('description')
+                    ->placeholder('Description')
+                    ->maxLength(255),
                 Forms\Components\FileUpload::make('url')
                     ->label('Image')
                     ->disk('public')
@@ -69,7 +76,7 @@ class VehicleResource extends Resource
                     ->nullable()
                     ->image()
                     ->imagePreviewHeight('250')
-                    ->dehydrated(fn($state) => filled($state))
+                    ->dehydrated(fn($state) => filled($state)),
             ]);
     }
 

@@ -9,7 +9,7 @@
                 </x-forms.form>
             </section>
 
-            <h2 class="text-2xl font-bold tracking-tight text-gray-900">Cars you also might like</h2>
+            <h2 class="text-2xl font-bold tracking-tight text-gray-900">Cars matching your search result</h2>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 @foreach ($vehicles as $vehicle)
                     <x-vehicle-tile :vehicle="$vehicle"/>

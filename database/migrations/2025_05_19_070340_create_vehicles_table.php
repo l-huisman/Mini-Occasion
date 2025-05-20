@@ -22,6 +22,9 @@ return new class extends Migration
             $table->integer('bought_at');
             $table->integer('available_at');
             $table->string('url')->nullable();
+            $table->string('description')->nullable();
+            $table->string('model')->nullable();
+            $table->integer('mileage')->nullable();
             $table->timestamps();
         });
     }
