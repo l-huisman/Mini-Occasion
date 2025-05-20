@@ -9,12 +9,13 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 
 class VehicleResource extends Resource
 {
     protected static ?string $model = Vehicle::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 
     public static function form(Form $form): Form
     {
@@ -28,28 +29,13 @@ class VehicleResource extends Resource
                         'regex' => 'The license plate format is invalid.',
                         'required' => 'The license plate is required.'
                     ]),
-                Forms\Components\Select::make('brand')
-                    ->options([
-                        'Tesla' => 'Tesla',
-                        'Mercedes' => 'Mercedes',
-                        'BMW' => 'BMW',
-                        'Ford' => 'Ford',
-                        'Toyota' => 'Toyota',
-                        'Volkswagen' => 'Volkswagen',
-                        'NIO' => 'NIO',
-                        'Hyundai' => 'Hyundai'
-                    ]) //TODO make this load from the db
+                Forms\Components\Select::make('brand_id')
+                    ->relationship('brand', 'name')
+                    ->preload()
                     ->required(),
-                Forms\Components\Select::make('type')
-                    ->options([
-                        'Sedan' => 'Sedan',
-                        'Truck' => 'Truck',
-                        'Minivan' => 'Minivan',
-                        'Coupe' => 'Coupe',
-                        'Hatchback' => 'Hatchback',
-                        'Convertible' => 'Convertible',
-                        'Wagon' => 'Wagon'
-                    ]) //TODO make this load from the db
+                Forms\Components\Select::make('type_id')
+                    ->relationship('type', 'name')
+                    ->preload()
                     ->required(),
                 Forms\Components\DatePicker::make('build_date')
                     ->beforeOrEqual(today())
@@ -71,7 +57,7 @@ class VehicleResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\Select::make('categories')
-                    ->relationship('categories', 'name') // Use relationship name and display column
+                    ->relationship('categories', 'name')
                     ->multiple()
                     ->preload()
                     ->required(),
@@ -81,7 +67,8 @@ class VehicleResource extends Resource
                     ->directory('vehicle-images')
                     ->nullable()
                     ->image()
-                    ->imagePreviewHeight('250'),
+                    ->imagePreviewHeight('250')
+                    ->dehydrated(fn($state) => filled($state))
             ]);
     }
 
@@ -91,9 +78,9 @@ class VehicleResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('license_plate')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('brand')
+                Tables\Columns\TextColumn::make('brand.name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('type.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('build_date')
                     ->Date()
@@ -121,6 +108,7 @@ class VehicleResource extends Resource
                     ->getStateUsing(fn($record): string => asset($record->url)),
 
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Brand;
+use App\Models\Type;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +16,8 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('license_plate');
-            $table->string('brand');
-            $table->string('type');
+            $table->foreignIdFor(Brand::class);
+            $table->foreignIdFor(Type::class);
             $table->dateTime('build_date');
             $table->integer('bought_at');
             $table->integer('available_at');

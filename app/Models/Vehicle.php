@@ -13,8 +13,8 @@ class Vehicle extends Model
 
     protected $fillable = [
         'license_plate',
-        'brand',
-        'type',
+        'brand_id',
+        'type_id',
         'build_date',
         'bought_at',
         'available_at',
@@ -28,5 +28,15 @@ class Vehicle extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(Type::class);
     }
 }

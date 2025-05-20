@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use App\Models\Vehicle;
+use Database\Factories\CategoryFactory as AppCategoryFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB; // Import DB facade if clearing pivot table
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,13 +15,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Optional: Create users
+        // \App\Models\User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $categoryNames = AppCategoryFactory::getCategoryNames();
+        $createdCategories = [];
+        foreach ($categoryNames as $name) {
+            $createdCategories[] = Category::firstOrCreate(['name' => $name]);
+        }
 
-        $this->call(VehicleSeeder::class);
+        $vehicles = Vehicle::factory(50)->create();
+        if (!empty($createdCategories)) {
+            $categoryIds = collect($createdCategories)->pluck('id');
+            $vehicles->each(function (Vehicle $vehicle) use ($categoryIds) {
+                if ($categoryIds->isNotEmpty()) {
+                    $vehicle->categories()->attach(
+                        $categoryIds->random(rand(1, min($categoryIds->count(), 3)))->all()
+                    );
+                }
+            });
+        }
     }
 }
