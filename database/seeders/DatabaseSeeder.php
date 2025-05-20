@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             $createdCategories[] = Category::firstOrCreate(['name' => $name]);
         }
 
-        $vehicles = Vehicle::factory(50)->create();
+        $vehicles = Vehicle::factory(20)->create();
         if (!empty($createdCategories)) {
             $categoryIds = collect($createdCategories)->pluck('id');
             $vehicles->each(function (Vehicle $vehicle) use ($categoryIds) {

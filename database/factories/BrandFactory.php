@@ -23,6 +23,8 @@ class BrandFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(self::$brandNames),
+            'description' => $this->faker->sentence(),
+            'url' => 'https://picsum.photos/id/' . $this->faker->numberBetween(1, 1000) . '/300/300/',
         ];
     }
 

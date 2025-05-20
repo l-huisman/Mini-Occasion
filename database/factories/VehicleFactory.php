@@ -5,8 +5,8 @@
     use App\Models\Brand;
     use App\Models\Type;
     use App\Models\Vehicle;
-    use Database\Factories\BrandFactory as AppBrandFactory;
-    use Database\Factories\TypeFactory as AppTypeFactory;
+    use Database\Factories\BrandFactory as BrandFactory;
+    use Database\Factories\TypeFactory as TypeFactory;
     use Illuminate\Database\Eloquent\Factories\Factory;
 
     /**
@@ -24,7 +24,7 @@
             return [
                 'license_plate' => $this->faker->regexify('/[A-Z]-[1-9]{3}-[A-Z]{2}/'),
                 'brand_id' => function () {
-                    $possibleNames = AppBrandFactory::getBrandNames();
+                    $possibleNames = BrandFactory::getBrandNames();
                     $existingNames = Brand::pluck('name')->all();
                     $availableNewNames = array_diff($possibleNames, $existingNames);
                     if (!empty($availableNewNames)) {
@@ -35,7 +35,7 @@
                     }
                 },
                 'type_id' => function () {
-                    $possibleNames = AppTypeFactory::getTypeNames();
+                    $possibleNames = TypeFactory::getTypeNames();
                     $existingNames = Type::pluck('name')->all();
                     $availableNewNames = array_diff($possibleNames, $existingNames);
 

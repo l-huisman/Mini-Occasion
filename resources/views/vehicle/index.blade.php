@@ -1,12 +1,12 @@
 <x-layout>
-    <section class="text-center pt-6">
-        <h1 class="font-bold text-4xl">Let's Find Your Next Occasion</h1>
-
-        <x-forms.form action="/search">
-            <x-forms.input :label="false" name="q" placeholder="Hyundai I10..."></x-forms.input>
-        </x-forms.form>
-    </section>
-    @foreach($vehicles as $vehicle)
-        <x-vehicle-tile :$vehicle/>
-    @endforeach
+    <div class="bg-white">
+        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+            <h2 class="text-2xl font-bold tracking-tight text-gray-900">Cars you might like</h2>
+            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                @foreach ($vehicles as $vehicle)
+                    <x-vehicle-tile :vehicle="$vehicle"/>
+                @endforeach
+            </div>
+        </div>
+    </div>
 </x-layout>
