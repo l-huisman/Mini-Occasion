@@ -14,7 +14,7 @@ class Brand extends Model
     protected $fillable = [
         'name',
         'description',
-        'image',
+        'url',
     ];
 
     public function vehicles(): HasMany
