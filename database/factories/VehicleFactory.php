@@ -48,7 +48,7 @@ class VehicleFactory extends Factory
             'build_date' => $this->faker->date(),
             'bought_at' => $this->faker->numberBetween(5000, 100000),
             'available_at' => $this->faker->numberBetween(15000, 150000),
-            'url' => 'https://picsum.photos/id/' . $this->faker->numberBetween(1, 250) . '/300/300/',
+            'url' => 'https://picsum.photos/id/' . $this->faker->numberBetween(1, 125) . '/300/300/',
             'description' => 'This vehicle is perfect for those who loves vehicles, it has a lot of features other vehicles don\'t have, and it is very cheap.',
             'model' => $this->faker->word(),
             'mileage' => $this->faker->numberBetween(1000, 100000),

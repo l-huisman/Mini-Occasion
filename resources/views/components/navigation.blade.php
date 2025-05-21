@@ -20,9 +20,9 @@
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
             <a href="../vehicle" class="text-sm/6 font-semibold text-gray-900">Vehicles</a>
-            <a href="#" class="text-sm/6 font-semibold text-gray-900">Categories</a>
-            <a href="#" class="text-sm/6 font-semibold text-gray-900">Locations</a>
-            <a href="#" class="text-sm/6 font-semibold text-gray-900">Company</a>
+            <a href="#" class="text-sm/6 font-semibold text-gray-400 cursor-default">Categories</a>
+            <a href="#" class="text-sm/6 font-semibold text-gray-400 cursor-default">Locations</a>
+            <a href="#" class="text-sm/6 font-semibold text-gray-400 cursor-default">Company</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
             <a href="/admin" class="text-sm/6 font-semibold text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>

@@ -5,7 +5,7 @@
                 <h1 class="font-bold text-4xl">Let's Find Your Next Vehicle</h1>
 
                 <x-forms.form action="/search">
-                    <x-forms.input :label="false" name="q" placeholder="Tesla"></x-forms.input>
+                    <x-forms.input :label="false" name="q" placeholder="Tesla..."></x-forms.input>
                 </x-forms.form>
             </section>
 
